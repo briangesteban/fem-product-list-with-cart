@@ -1,0 +1,10 @@
+.item-board {
+  &__header {
+    margin: 2rem;
+  }
+  &__menu-list {
+    display: flex;
+    flex-flow: column wrap;
+    margin-inline: 2rem;
+  }
+}

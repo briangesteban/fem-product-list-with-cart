@@ -1,7 +1,8 @@
 import "./App.scss";
+import { ItemBoard } from "./components/ItemBoard/ItemBoard";
 
 const App = () => {
-  return <></>;
+  return <ItemBoard />;
 };
 
 export default App;
