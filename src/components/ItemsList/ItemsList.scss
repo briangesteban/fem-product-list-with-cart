@@ -1,6 +1,21 @@
 .card {
   width: 100%;
 
+  &__img-container {
+    width: inherit;
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  &__btn-atc {
+    border-radius: 2.5rem;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    bottom: -0.8rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
   &__item-img {
     width: inherit;
     border-radius: 0.5rem;
