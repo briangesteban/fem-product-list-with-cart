@@ -1,3 +1,6 @@
+@use "./colors" as *;
+@use "./typography" as *;
+
 *,
 *::before,
 *::after {
@@ -9,6 +12,17 @@
   margin: 0;
 }
 
-#body {
+input,
+button {
+  font: inherit;
+}
+
+body {
+  font-family: $font-stack;
+  font-weight: $fw-regular;
+  font-size: $fs-body-copy;
+  font-optical-sizing: auto;
+  color: $clr-rose-900;
+  background-color: $clr-rose-100;
   min-height: 100vh;
 }

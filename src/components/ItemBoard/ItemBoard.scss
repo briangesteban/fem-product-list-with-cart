@@ -1,5 +1,9 @@
+@use "../../styles/typography" as *;
+
 .item-board {
   &__header {
+    font-weight: $fw-black;
+    font-size: $fs-header;
     margin: 2rem;
   }
   &__menu-list {

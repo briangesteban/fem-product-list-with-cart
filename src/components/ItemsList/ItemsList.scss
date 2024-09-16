@@ -1,5 +1,9 @@
+@use "../../styles/colors" as *;
+@use "../../styles/typography" as *;
+
 .card {
   width: 100%;
+  margin-bottom: 1.5rem;
 
   &__img-container {
     width: inherit;
@@ -14,16 +18,28 @@
     bottom: -0.8rem;
     left: 50%;
     transform: translate(-50%, 0);
+    border: solid 1px $clr-rose-500;
+    background-color: $clr-rose-50;
+    font-weight: $fw-bold;
+    font-size: $fs-xs;
   }
 
   &__item-img {
     width: inherit;
     border-radius: 0.5rem;
   }
+
   &__item-category {
+    font-weight: $fw-bold;
+    font-size: $fs-xs;
+    color: $clr-rose-400;
   }
+
   &__item-name {
+    font-size: $fs-body-copy;
   }
+
   &__item-price {
+    color: $clr-red;
   }
 }
