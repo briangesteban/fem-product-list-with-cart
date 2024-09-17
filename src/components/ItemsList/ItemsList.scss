@@ -12,6 +12,9 @@
   }
 
   &__btn-atc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 2.5rem;
     padding: 0.5rem 1rem;
     position: absolute;
@@ -22,11 +25,57 @@
     background-color: $clr-rose-50;
     font-weight: $fw-bold;
     font-size: $fs-xs;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__item-counter {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: -0.8rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: $clr-red;
+    border-radius: 2.5rem;
+    padding: 0.5rem 0.6rem;
+    width: 10rem;
+
+    &--visible {
+      display: flex;
+    }
+  }
+
+  &__btn-counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $fs-xs;
+    background-color: transparent;
+    color: $clr-rose-50;
+    border: solid 1px $clr-rose-50;
+    border-radius: 25rem;
+    padding: 0.2rem;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &__item-count {
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    color: $clr-rose-50;
   }
 
   &__item-img {
     width: inherit;
     border-radius: 0.5rem;
+
+    &--border-on {
+      border: solid 2px $clr-red;
+    }
   }
 
   &__item-category {
@@ -41,5 +90,9 @@
 
   &__item-price {
     color: $clr-red;
+  }
+
+  &__icon-atc {
+    margin-right: 0.5rem;
   }
 }
