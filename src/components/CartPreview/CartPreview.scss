@@ -1,0 +1,30 @@
+@use "../../styles/typography" as *;
+@use "../../styles/colors" as *;
+
+.cart-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $clr-rose-50;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  width: 100%;
+
+  &__header {
+    font-size: $fs-subheader;
+    align-self: flex-start;
+    color: $clr-red;
+  }
+
+  &__illustration {
+    width: 8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__information {
+    font-size: $fs-xs;
+    font-weight: $fw-bold;
+    color: $clr-rose-500;
+  }
+}

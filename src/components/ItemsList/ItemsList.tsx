@@ -65,7 +65,7 @@ const ItemsList = () => {
         </div>
         <p className="card__item-category">{menuItem.category}</p>
         <h2 className="card__item-name">{menuItem.name}</h2>
-        <h3 className="card__item-price">${menuItem.price.toFixed(2)}</h3>
+        <h3 className="card__item-price">{`$${menuItem.price.toFixed(2)}`}</h3>
       </article>
     );
   });
