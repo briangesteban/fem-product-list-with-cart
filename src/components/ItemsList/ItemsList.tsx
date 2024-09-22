@@ -6,19 +6,21 @@ import DecreaseIcon from "../../assets/images/icon-decrement-quantity.svg";
 import "./ItemsList.scss";
 
 const ItemsList = () => {
+  const [countChange, setCountChange] = useState<number>(1);
   const [locStorage, setLocStorage] = useState<object>(localStorage);
   const [locStorageLen, setLocStorageLen] = useState<number>(
-    localStorage.length
+    Object.keys(locStorage).length
   );
 
+  // Tracks local storage length to update local storage value, and re-render.
   useEffect(() => {
     setLocStorage(localStorage);
-  }, [locStorageLen]);
+  }, [locStorageLen, countChange]);
 
   // Add to Cart Button Handler
   const addToCartHandler = (item: string): void => {
     // Creates key/value on local storage or update it's value
-    if (!localStorage.getItem(item)) {
+    if (!locStorage[item as keyof typeof locStorage]) {
       localStorage.setItem(item, "1");
       setLocStorageLen(locStorageLen + 1);
     } else {
@@ -26,6 +28,32 @@ const ItemsList = () => {
         item,
         (Number(localStorage.getItem(item)) + 1).toString()
       );
+    }
+  };
+
+  // Decrease Item Count Button Handler
+  const decreaseCountHandler = (item: string): void => {
+    let newCount: number =
+      Number(locStorage[item as keyof typeof locStorage]) - 1;
+    if (!newCount) {
+      localStorage.removeItem(item);
+      setLocStorageLen(Object.keys(locStorage).length - 1);
+      setCountChange(0);
+    } else {
+      localStorage.setItem(item, newCount.toString());
+      setCountChange(newCount);
+    }
+  };
+
+  // Increase Item Count Button Handler
+  const increaseCountHandler = (item: string): void => {
+    let newCount: number =
+      Number(locStorage[item as keyof typeof locStorage]) + 1;
+    if (newCount > 50) {
+      setCountChange(newCount);
+    } else {
+      localStorage.setItem(item, newCount.toString());
+      setCountChange(newCount);
     }
   };
 
@@ -67,13 +95,25 @@ const ItemsList = () => {
             }
             aria-label={`${menuItem.name} Count`}
           >
-            <button className="card__btn-counter" aria-label="Decrease value">
+            <button
+              className="card__btn-counter"
+              aria-label="Decrease value"
+              onClick={() => {
+                decreaseCountHandler(menuItem.name);
+              }}
+            >
               <img src={DecreaseIcon} alt="Decrease icon" />
             </button>
             <span className="card__item-count" aria-label="Item Count">
               {locStorage[menuItem.name as keyof typeof locStorage]}
             </span>
-            <button className="card__btn-counter" aria-label="Increase value">
+            <button
+              className="card__btn-counter"
+              aria-label="Increase value"
+              onClick={() => {
+                increaseCountHandler(menuItem.name);
+              }}
+            >
               <img src={IncreaseIcon} alt="Increase icon" />
             </button>
           </div>
