@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import menuData from "../../data/data.json";
 import AddToCartIcon from "../../assets/images/icon-add-to-cart.svg";
 import IncreaseIcon from "../../assets/images/icon-increment-quantity.svg";
@@ -6,12 +6,27 @@ import DecreaseIcon from "../../assets/images/icon-decrement-quantity.svg";
 import "./ItemsList.scss";
 
 const ItemsList = () => {
-  // Cart State
-  const [isCartEmpty, setIsCartEmpty] = useState<boolean>(true);
+  const [locStorage, setLocStorage] = useState<object>(localStorage);
+  const [locStorageLen, setLocStorageLen] = useState<number>(
+    localStorage.length
+  );
+
+  useEffect(() => {
+    setLocStorage(localStorage);
+  }, [locStorageLen]);
 
   // Add to Cart Button Handler
-  const addToCartHandler = (): void => {
-    setIsCartEmpty(false);
+  const addToCartHandler = (item: string): void => {
+    // Creates key/value on local storage or update it's value
+    if (!localStorage.getItem(item)) {
+      localStorage.setItem(item, "1");
+      setLocStorageLen(locStorageLen + 1);
+    } else {
+      localStorage.setItem(
+        item,
+        (Number(localStorage.getItem(item)) + 1).toString()
+      );
+    }
   };
 
   const menuCards = menuData.map((menuItem, index) => {
@@ -22,19 +37,19 @@ const ItemsList = () => {
             src={menuItem.image.mobile}
             alt={menuItem.name}
             className={
-              !isCartEmpty
+              locStorage[menuItem.name as keyof typeof locStorage]
                 ? "card__item-img card__item-img--border-on"
                 : "card__item-img"
             }
           />
           <button
             className={
-              !isCartEmpty
+              locStorage[menuItem.name as keyof typeof locStorage]
                 ? "card__btn-atc card__btn-atc--hidden"
                 : "card__btn-atc"
             }
             onClick={() => {
-              addToCartHandler();
+              addToCartHandler(menuItem.name);
             }}
           >
             <img
@@ -46,7 +61,7 @@ const ItemsList = () => {
           </button>
           <div
             className={
-              !isCartEmpty
+              locStorage[menuItem.name as keyof typeof locStorage]
                 ? "card__item-counter card__item-counter--visible"
                 : "card__item-counter"
             }
@@ -56,7 +71,7 @@ const ItemsList = () => {
               <img src={DecreaseIcon} alt="Decrease icon" />
             </button>
             <span className="card__item-count" aria-label="Item Count">
-              1
+              {locStorage[menuItem.name as keyof typeof locStorage]}
             </span>
             <button className="card__btn-counter" aria-label="Increase value">
               <img src={IncreaseIcon} alt="Increase icon" />
