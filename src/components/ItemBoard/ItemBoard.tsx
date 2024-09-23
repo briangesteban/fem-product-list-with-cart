@@ -1,58 +1,43 @@
 import { useState, useEffect } from "react";
+import type { IMenuItems } from "../../utils/customTypes";
+import menuData from "../../data/data.json";
 import { ItemsList } from "../ItemsList/ItemsList";
 import { CartPreview } from "../CartPreview/CartPreview";
 import "./ItemBoard.scss";
 
-interface IBillList {
-  name: string;
-  price: number;
-  count: number;
+// Get initial value of total items.
+let initTotalItems: number = 0;
+
+// Run if, there's item on local storage.
+if (localStorage.length) {
+  for (let i: number = 0; i < localStorage.length; i++) {
+    initTotalItems += JSON.parse(
+      localStorage.getItem(localStorage.key(i) as string) as string
+    ).count;
+  }
 }
 
 const ItemBoard = () => {
-  const [countChange, setCountChange] = useState<number>(1);
-  const [locStorage, setLocStorage] =
-    useState<Record<string, string>>(localStorage);
-  const [locStorageLen, setLocStorageLen] = useState<number>(
-    Object.keys(locStorage).length
-  );
-  const [totalItems, setTotalItems] = useState<number>(0);
-  const [billList, setBillList] = useState<IBillList[]>([]);
+  const [menuItems] = useState<IMenuItems[]>(menuData);
+  const [storage, setStorage] = useState<Record<string, string>>(localStorage);
+  const [totalItems, setTotalItems] = useState<number>(initTotalItems);
 
-  // Tracks dependencies to update local storage value, and re-render.
+  // Tracks changes on totalItems state to trigger re-render.
   useEffect(() => {
-    setLocStorage(localStorage);
-
-    if (!totalItems) {
-      let tempVal: number = 0;
-      for (let i: number = 0; i < locStorageLen; i++) {
-        tempVal += Number(locStorage[Object.keys(locStorage)[i]]);
-      }
-      setTotalItems(tempVal);
-    }
-
-    console.log(billList);
-  }, [locStorageLen, countChange]);
+    setStorage(localStorage);
+  }, [totalItems]);
 
   return (
     <main className="item-board">
       <h1 className="item-board__header">Desserts</h1>
       <section className="item-board__menu-list">
         <ItemsList
-          setCountChange={setCountChange}
-          locStorage={locStorage}
-          locStorageLen={locStorageLen}
-          setLocStorageLen={setLocStorageLen}
+          menuItems={menuItems}
+          storage={storage}
           totalItems={totalItems}
           setTotalItems={setTotalItems}
-          billList={billList}
-          setBillList={setBillList}
         />
-        <CartPreview
-          locStorage={locStorage}
-          locStorageLen={locStorageLen}
-          totalItems={totalItems}
-        />
+        <CartPreview totalItems={totalItems} />
       </section>
     </main>
   );

@@ -1,36 +1,15 @@
 import EmptyCartIllustration from "../../assets/images/illustration-empty-cart.svg";
 import "./CartPreview.scss";
 
-interface IProps {
-  locStorage: Record<string, string>;
-  locStorageLen: number;
-  totalItems: number;
-}
-
-const CartPreview = (props: IProps) => {
-  const { locStorage, locStorageLen, totalItems } = props;
-  const keys: string[] = Object.keys(locStorage);
-
-  const cartList = keys.map((key, index) => {
-    return (
-      <li key={index}>
-        <h3>{key}</h3>
-        <div>
-          <span>
-            <strong>{locStorage[key]}x</strong>
-          </span>
-          <span></span>
-        </div>
-      </li>
-    );
-  });
+const CartPreview = (props: { totalItems: number }) => {
+  const { totalItems } = props; // Destructured props
 
   return (
     <section className="cart-preview">
       <h2 className="cart-preview__header">Your Cart &#40;{totalItems}&#41;</h2>
       <div
         className={
-          totalItems
+          false
             ? "cart-preview__empty-cart cart-preview__empty-cart--false"
             : "cart-preview__empty-cart"
         }
@@ -45,7 +24,7 @@ const CartPreview = (props: IProps) => {
         </p>
       </div>
       <div className="cart-preview__cart-active">
-        <ul>{cartList}</ul>
+        <ul></ul>
       </div>
     </section>
   );
