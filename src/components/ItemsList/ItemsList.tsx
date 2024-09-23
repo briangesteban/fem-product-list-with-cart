@@ -1,28 +1,46 @@
-import { useState, useEffect } from "react";
 import menuData from "../../data/data.json";
 import AddToCartIcon from "../../assets/images/icon-add-to-cart.svg";
 import IncreaseIcon from "../../assets/images/icon-increment-quantity.svg";
 import DecreaseIcon from "../../assets/images/icon-decrement-quantity.svg";
 import "./ItemsList.scss";
 
-const ItemsList = () => {
-  const [countChange, setCountChange] = useState<number>(1);
-  const [locStorage, setLocStorage] = useState<object>(localStorage);
-  const [locStorageLen, setLocStorageLen] = useState<number>(
-    Object.keys(locStorage).length
-  );
+interface IBillList {
+  name: string;
+  price: number;
+  count: number;
+}
 
-  // Tracks local storage length to update local storage value, and re-render.
-  useEffect(() => {
-    setLocStorage(localStorage);
-  }, [locStorageLen, countChange]);
+interface IProps {
+  setCountChange: (arg: number) => void;
+  locStorage: Record<string, string>;
+  locStorageLen: number;
+  setLocStorageLen: (arg: number) => void;
+  totalItems: number;
+  setTotalItems: (arg: number) => void;
+  billList: IBillList[];
+  setBillList: (arg: IBillList[]) => void;
+}
+
+const ItemsList = (props: IProps) => {
+  const {
+    setCountChange,
+    locStorage,
+    locStorageLen,
+    setLocStorageLen,
+    totalItems,
+    setTotalItems,
+    billList,
+    setBillList,
+  } = props;
 
   // Add to Cart Button Handler
-  const addToCartHandler = (item: string): void => {
+  const addToCartHandler = (item: string, price: number): void => {
     // Creates key/value on local storage or update it's value
     if (!locStorage[item as keyof typeof locStorage]) {
       localStorage.setItem(item, "1");
       setLocStorageLen(locStorageLen + 1);
+      setTotalItems(totalItems + 1);
+      setBillList([...billList, { name: item, price, count: 1 }]);
     } else {
       localStorage.setItem(
         item,
@@ -39,9 +57,11 @@ const ItemsList = () => {
       localStorage.removeItem(item);
       setLocStorageLen(Object.keys(locStorage).length - 1);
       setCountChange(0);
+      if (totalItems > 0) setTotalItems(totalItems - 1);
     } else {
       localStorage.setItem(item, newCount.toString());
       setCountChange(newCount);
+      setTotalItems(totalItems - 1);
     }
   };
 
@@ -54,6 +74,7 @@ const ItemsList = () => {
     } else {
       localStorage.setItem(item, newCount.toString());
       setCountChange(newCount);
+      setTotalItems(totalItems + 1);
     }
   };
 
@@ -77,7 +98,7 @@ const ItemsList = () => {
                 : "card__btn-atc"
             }
             onClick={() => {
-              addToCartHandler(menuItem.name);
+              addToCartHandler(menuItem.name, menuItem.price);
             }}
           >
             <img

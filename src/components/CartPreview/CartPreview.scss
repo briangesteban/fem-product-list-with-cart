@@ -2,9 +2,6 @@
 @use "../../styles/colors" as *;
 
 .cart-preview {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background-color: $clr-rose-50;
   border-radius: 0.5rem;
   padding: 2rem;
@@ -14,6 +11,16 @@
     font-size: $fs-subheader;
     align-self: flex-start;
     color: $clr-red;
+  }
+
+  &__empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--false {
+      display: none;
+    }
   }
 
   &__illustration {
