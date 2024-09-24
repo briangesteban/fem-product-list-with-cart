@@ -37,7 +37,7 @@ const ItemBoard = () => {
           totalItems={totalItems}
           setTotalItems={setTotalItems}
         />
-        <CartPreview totalItems={totalItems} />
+        <CartPreview totalItems={totalItems} storage={storage} />
       </section>
     </main>
   );

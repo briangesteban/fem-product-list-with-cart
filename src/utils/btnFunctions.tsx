@@ -5,7 +5,10 @@ const addToCartHandler = (
   totalItems: number,
   setTotalItems: (arg: number) => void
 ): void => {
-  localStorage.setItem(item, JSON.stringify({ count: 1, price })); // Create key/value pair on local storage.
+  localStorage.setItem(
+    item,
+    JSON.stringify({ count: 1, price, subTotal: price })
+  ); // Create key/value pair on local storage.
   setTotalItems(totalItems + 1); // Update total items to trigger re-render.
 };
 
@@ -16,10 +19,11 @@ const decreaseCountHandler = (
   totalItems: number,
   setTotalItems: (arg: number) => void
 ): void => {
-  const currValue: { count: number; price: number } = JSON.parse(storage[item]); // Parse storage key/value pair.
+  const currValue: { count: number; price: number; subTotal: number } =
+    JSON.parse(storage[item]); // Parse storage key/value pair.
   const newValue: number = currValue.count - 1; // Decrase item count.
 
-  // If item value reached 0, remove item for local storage, else decrease total items and update item count.
+  // If item value reached 0, remove item for local storage, else decrease total items and update item count and sub total.
   if (!newValue) {
     setTotalItems(totalItems - 1);
     localStorage.removeItem(item);
@@ -27,7 +31,11 @@ const decreaseCountHandler = (
     setTotalItems(totalItems - 1);
     localStorage.setItem(
       item,
-      JSON.stringify({ count: newValue, price: currValue.price })
+      JSON.stringify({
+        count: newValue,
+        price: currValue.price,
+        subTotal: currValue.subTotal - currValue.price,
+      })
     );
   }
 };
@@ -39,15 +47,20 @@ const increaseCountHandler = (
   totalItems: number,
   setTotalItems: (arg: number) => void
 ): void => {
-  const currValue: { count: number; price: number } = JSON.parse(storage[item]); // Parse storage key/value pair.
+  const currValue: { count: number; price: number; subTotal: number } =
+    JSON.parse(storage[item]); // Parse storage key/value pair.
   const newValue: number = currValue.count + 1; // add one to item count.
 
-  // Item value !> 50, add 1 to total items and updates item count.
+  // Item value !> 50, add 1 to total items and updates item count and sub total.
   if (!(newValue > 50)) {
     setTotalItems(totalItems + 1);
     localStorage.setItem(
       item,
-      JSON.stringify({ count: newValue, price: currValue.price })
+      JSON.stringify({
+        count: newValue,
+        price: currValue.price,
+        subTotal: currValue.subTotal + currValue.price,
+      })
     );
   }
 };
