@@ -1,11 +1,14 @@
 import EmptyCartIllustration from "../../assets/images/illustration-empty-cart.svg";
+import RemoveItemIcon from "../../assets/images/icon-remove-item.svg";
+import CarbonNeutralIcon from "../../assets/images/icon-carbon-neutral.svg";
 import "./CartPreview.scss";
 
 const CartPreview = (props: {
   totalItems: number;
   storage: Record<string, string>;
+  grandTotal: number;
 }) => {
-  const { totalItems, storage } = props; // Destructured props
+  const { totalItems, storage, grandTotal } = props; // Destructured props
   let storageKeys: string[] = [];
   let cartList: JSX.Element[] = [];
 
@@ -15,15 +18,35 @@ const CartPreview = (props: {
     cartList = storageKeys.map((key, index) => {
       return (
         <li className="cart-list__item" key={index}>
-          <h3>{key}</h3>
-          <span>{storage[key] && JSON.parse(storage[key]).count}x</span>
-          <span className="cart-list__price">
-            {storage[key] && `@$${JSON.parse(storage[key]).price.toFixed(2)}`}
-          </span>
-          <span className="cart-list__sub-total">
-            {storage[key] && `$${JSON.parse(storage[key]).subTotal.toFixed(2)}`}
-          </span>
-          <button className="cart-list__btn-remove">x</button>
+          <div className="cart-list__divider">
+            <h3 className="cart-list__item-name">{key}</h3>
+            <span className="cart-list__item-count">
+              {storage[key] && JSON.parse(storage[key]).count}x
+            </span>
+            <span className="cart-list__item-price">
+              {storage[key] &&
+                `@ $${JSON.parse(storage[key]).price.toFixed(2)}`}
+            </span>
+            <span className="cart-list__item-subtotal">
+              {storage[key] &&
+                `$${JSON.parse(storage[key]).subTotal.toFixed(2)}`}
+            </span>
+          </div>
+          <div className="cart-list__divider">
+            <button
+              className="cart-list__btn-remove"
+              aria-label="Remove Item"
+              onClick={() => {
+                console.log(storage[key]);
+              }}
+            >
+              <img
+                src={RemoveItemIcon}
+                alt="Remove Item Icon"
+                className="cart-list__btn-icon"
+              />
+            </button>
+          </div>
         </li>
       );
     });
@@ -48,8 +71,34 @@ const CartPreview = (props: {
           Your added items will appear here
         </p>
       </div>
-      <div className="cart-preview__cart-active">
+      <div
+        className={
+          totalItems
+            ? "cart-preview__cart-list cart-preview__cart-list--true"
+            : "cart-preview__cart-list"
+        }
+      >
         <ul className="cart-list">{totalItems && cartList}</ul>
+        <h4 className="cart-preview__order-total">
+          Order Total
+          <span className="cart-preview__total-price">{`$${grandTotal.toFixed(
+            2
+          )}`}</span>
+        </h4>
+        <div className="cart-preview__badge">
+          <img src={CarbonNeutralIcon} alt="" className="cart-preview__icon" />
+          <p className="cart-preview__tagline">
+            This is a <strong>carbon-neutral</strong> delivery
+          </p>
+        </div>
+        <button
+          className="cart-preview__btn-confirm"
+          onClick={() => {
+            alert("Order Sent");
+          }}
+        >
+          Confirm Order
+        </button>
       </div>
     </section>
   );

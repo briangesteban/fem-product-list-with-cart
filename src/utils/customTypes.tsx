@@ -10,6 +10,8 @@ interface IPropsItemList {
   storage: Record<string, string>;
   totalItems: number;
   setTotalItems: (arg: number) => void;
+  grandTotal: number;
+  setGrandTotal: (arg: number) => void;
 }
 
 export type { IMenuItems, IPropsItemList };

@@ -5,8 +5,8 @@ import { ItemsList } from "../ItemsList/ItemsList";
 import { CartPreview } from "../CartPreview/CartPreview";
 import "./ItemBoard.scss";
 
-// Get initial value of total items.
 let initTotalItems: number = 0;
+let initGrandTotal: number = 0;
 
 // Run if, there's item on local storage.
 if (localStorage.length) {
@@ -14,6 +14,9 @@ if (localStorage.length) {
     initTotalItems += JSON.parse(
       localStorage.getItem(localStorage.key(i) as string) as string
     ).count;
+    initGrandTotal += JSON.parse(
+      localStorage.getItem(localStorage.key(i) as string) as string
+    ).subTotal;
   }
 }
 
@@ -21,6 +24,7 @@ const ItemBoard = () => {
   const [menuItems] = useState<IMenuItems[]>(menuData);
   const [storage, setStorage] = useState<Record<string, string>>(localStorage);
   const [totalItems, setTotalItems] = useState<number>(initTotalItems);
+  const [grandTotal, setGrandTotal] = useState<number>(initGrandTotal);
 
   // Tracks changes on totalItems state to trigger re-render.
   useEffect(() => {
@@ -36,8 +40,14 @@ const ItemBoard = () => {
           storage={storage}
           totalItems={totalItems}
           setTotalItems={setTotalItems}
+          grandTotal={grandTotal}
+          setGrandTotal={setGrandTotal}
         />
-        <CartPreview totalItems={totalItems} storage={storage} />
+        <CartPreview
+          totalItems={totalItems}
+          storage={storage}
+          grandTotal={grandTotal}
+        />
       </section>
     </main>
   );

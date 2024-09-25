@@ -10,7 +10,14 @@ import DecreaseIcon from "../../assets/images/icon-decrement-quantity.svg";
 import "./ItemsList.scss";
 
 const ItemsList = (props: IPropsItemList) => {
-  const { menuItems, storage, totalItems, setTotalItems } = props; // Destructured props
+  const {
+    menuItems,
+    storage,
+    totalItems,
+    setTotalItems,
+    grandTotal,
+    setGrandTotal,
+  } = props; // Destructured props
 
   const menuCards = menuItems.map((menuItem, index) => {
     return (
@@ -36,7 +43,9 @@ const ItemsList = (props: IPropsItemList) => {
                 menuItem.name,
                 menuItem.price,
                 totalItems,
-                setTotalItems
+                setTotalItems,
+                grandTotal,
+                setGrandTotal
               );
             }}
           >
@@ -61,9 +70,12 @@ const ItemsList = (props: IPropsItemList) => {
               onClick={() => {
                 decreaseCountHandler(
                   menuItem.name,
+                  menuItem.price,
                   storage,
                   totalItems,
-                  setTotalItems
+                  setTotalItems,
+                  grandTotal,
+                  setGrandTotal
                 );
               }}
             >
@@ -80,9 +92,12 @@ const ItemsList = (props: IPropsItemList) => {
               onClick={() => {
                 increaseCountHandler(
                   menuItem.name,
+                  menuItem.price,
                   storage,
                   totalItems,
-                  setTotalItems
+                  setTotalItems,
+                  grandTotal,
+                  setGrandTotal
                 );
               }}
             >

@@ -17,6 +17,10 @@ button {
   font: inherit;
 }
 
+strong {
+  font-weight: $fw-black;
+}
+
 body {
   font-family: $font-stack;
   font-weight: $fw-regular;
