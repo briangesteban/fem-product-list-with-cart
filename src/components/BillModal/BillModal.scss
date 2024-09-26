@@ -21,6 +21,7 @@
   flex-direction: column;
   position: absolute;
   bottom: 0;
+  left: 0;
   background-color: $clr-rose-50;
   border-radius: 0.8rem 0.8rem 0 0;
   padding: 1.5rem;
@@ -79,7 +80,7 @@
     display: flex;
     align-items: center;
     padding: 1rem 0;
-    border-bottom: solid 1px $clr-rose-300;
+    border-bottom: solid 2px rgba($clr-rose-300, 0.1);
 
     & > :last-child {
       margin-left: auto;
@@ -95,7 +96,7 @@
 
     &-subtotal {
       font-size: $fs-body-copy;
-      font-weight: $fw-bold;
+      font-weight: $fw-black;
     }
   }
 

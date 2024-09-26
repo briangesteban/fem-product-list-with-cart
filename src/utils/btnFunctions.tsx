@@ -77,6 +77,21 @@ const increaseCountHandler = (
   }
 };
 
+// Remove Item Button Handler
+const removeItemHandler = (
+  item: string,
+  count: number,
+  subTotal: number,
+  totalItems: number,
+  setTotalItems: (arg: number) => void,
+  grandTotal: number,
+  setGrandTotal: (arg: number) => void
+) => {
+  setTotalItems(totalItems - count);
+  setGrandTotal(grandTotal - subTotal);
+  localStorage.removeItem(item);
+};
+
 // Confirm Order Button Handler
 const confirmOrderHandler = (
   storage: Record<string, string>,
@@ -98,4 +113,5 @@ export {
   decreaseCountHandler,
   increaseCountHandler,
   confirmOrderHandler,
+  removeItemHandler,
 };

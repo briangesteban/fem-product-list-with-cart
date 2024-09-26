@@ -1,4 +1,7 @@
-import { confirmOrderHandler } from "../../utils/btnFunctions";
+import {
+  removeItemHandler,
+  confirmOrderHandler,
+} from "../../utils/btnFunctions";
 import EmptyCartIllustration from "../../assets/images/illustration-empty-cart.svg";
 import RemoveItemIcon from "../../assets/images/icon-remove-item.svg";
 import CarbonNeutralIcon from "../../assets/images/icon-carbon-neutral.svg";
@@ -50,7 +53,15 @@ const CartPreview = (props: {
               className="cart-list__btn-remove"
               aria-label="Remove Item"
               onClick={() => {
-                console.log(storage[key]);
+                removeItemHandler(
+                  key,
+                  JSON.parse(storage[key]).count,
+                  JSON.parse(storage[key]).subTotal,
+                  totalItems,
+                  setTotalItems,
+                  grandTotal,
+                  setGrandTotal
+                );
               }}
             >
               <img
@@ -67,7 +78,7 @@ const CartPreview = (props: {
 
   return (
     <section className="cart-preview">
-      <h2 className="cart-preview__header">{`Your Cart(${totalItems})`}</h2>
+      <h2 className="cart-preview__header">{`Your Cart (${totalItems})`}</h2>
       <div
         className={
           totalItems
