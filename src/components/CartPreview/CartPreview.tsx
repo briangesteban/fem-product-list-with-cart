@@ -1,3 +1,4 @@
+import { confirmOrderHandler } from "../../utils/btnFunctions";
 import EmptyCartIllustration from "../../assets/images/illustration-empty-cart.svg";
 import RemoveItemIcon from "../../assets/images/icon-remove-item.svg";
 import CarbonNeutralIcon from "../../assets/images/icon-carbon-neutral.svg";
@@ -7,8 +8,20 @@ const CartPreview = (props: {
   totalItems: number;
   storage: Record<string, string>;
   grandTotal: number;
+  setGrandTotal: (arg: number) => void;
+  setTotalItems: (arg: number) => void;
+  setBill: (arg: { cartItems: string; grandTotal: number }) => void;
+  setIsModalOn: (arg: boolean) => void;
 }) => {
-  const { totalItems, storage, grandTotal } = props; // Destructured props
+  const {
+    totalItems,
+    storage,
+    grandTotal,
+    setGrandTotal,
+    setTotalItems,
+    setBill,
+    setIsModalOn,
+  } = props; // Destructured props
   let storageKeys: string[] = [];
   let cartList: JSX.Element[] = [];
 
@@ -54,7 +67,7 @@ const CartPreview = (props: {
 
   return (
     <section className="cart-preview">
-      <h2 className="cart-preview__header">Your Cart &#40;{totalItems}&#41;</h2>
+      <h2 className="cart-preview__header">{`Your Cart(${totalItems})`}</h2>
       <div
         className={
           totalItems
@@ -94,7 +107,14 @@ const CartPreview = (props: {
         <button
           className="cart-preview__btn-confirm"
           onClick={() => {
-            alert("Order Sent");
+            confirmOrderHandler(
+              storage,
+              grandTotal,
+              setGrandTotal,
+              setTotalItems,
+              setBill,
+              setIsModalOn
+            );
           }}
         >
           Confirm Order

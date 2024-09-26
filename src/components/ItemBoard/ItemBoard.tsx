@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import type { IMenuItems } from "../../utils/customTypes";
+import type { IMenuItems, IBill } from "../../utils/customTypes";
 import menuData from "../../data/data.json";
 import { ItemsList } from "../ItemsList/ItemsList";
 import { CartPreview } from "../CartPreview/CartPreview";
+import { BillModal } from "../BillModal/BillModal";
 import "./ItemBoard.scss";
 
 let initTotalItems: number = 0;
@@ -25,6 +26,11 @@ const ItemBoard = () => {
   const [storage, setStorage] = useState<Record<string, string>>(localStorage);
   const [totalItems, setTotalItems] = useState<number>(initTotalItems);
   const [grandTotal, setGrandTotal] = useState<number>(initGrandTotal);
+  const [bill, setBill] = useState<IBill>({
+    cartItems: JSON.stringify(storage),
+    grandTotal: initGrandTotal,
+  });
+  const [isModalOn, setIsModalOn] = useState<boolean>(false);
 
   // Tracks changes on totalItems state to trigger re-render.
   useEffect(() => {
@@ -34,7 +40,13 @@ const ItemBoard = () => {
   return (
     <main className="item-board">
       <h1 className="item-board__header">Desserts</h1>
-      <section className="item-board__menu-list">
+      <section
+        className={
+          !isModalOn
+            ? "item-board__menu-list"
+            : "item-board__menu-list item-board__menu-list--true"
+        }
+      >
         <ItemsList
           menuItems={menuItems}
           storage={storage}
@@ -47,8 +59,18 @@ const ItemBoard = () => {
           totalItems={totalItems}
           storage={storage}
           grandTotal={grandTotal}
+          setGrandTotal={setGrandTotal}
+          setTotalItems={setTotalItems}
+          setBill={setBill}
+          setIsModalOn={setIsModalOn}
         />
       </section>
+      <BillModal
+        bill={bill}
+        isModalOn={isModalOn}
+        setIsModalOn={setIsModalOn}
+        menuItems={menuItems}
+      />
     </main>
   );
 };

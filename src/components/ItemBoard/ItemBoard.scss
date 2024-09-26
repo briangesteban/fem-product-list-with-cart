@@ -11,5 +11,10 @@
   &__menu-list {
     display: flex;
     flex-flow: column wrap;
+
+    &--true {
+      display: none;
+      overflow: hidden;
+    }
   }
 }

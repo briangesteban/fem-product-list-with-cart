@@ -77,4 +77,25 @@ const increaseCountHandler = (
   }
 };
 
-export { addToCartHandler, decreaseCountHandler, increaseCountHandler };
+// Confirm Order Button Handler
+const confirmOrderHandler = (
+  storage: Record<string, string>,
+  grandTotal: number,
+  setGrandTotal: (arg: number) => void,
+  setTotalItems: (arg: number) => void,
+  setBill: (arg: { cartItems: string; grandTotal: number }) => void,
+  setIsModalOn: (arg: boolean) => void
+): void => {
+  setBill({ cartItems: JSON.stringify(storage), grandTotal });
+  localStorage.clear();
+  setGrandTotal(0);
+  setTotalItems(0);
+  setIsModalOn(true);
+};
+
+export {
+  addToCartHandler,
+  decreaseCountHandler,
+  increaseCountHandler,
+  confirmOrderHandler,
+};

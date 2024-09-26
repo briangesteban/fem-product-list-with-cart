@@ -14,4 +14,9 @@ interface IPropsItemList {
   setGrandTotal: (arg: number) => void;
 }
 
-export type { IMenuItems, IPropsItemList };
+interface IBill {
+  cartItems: string;
+  grandTotal: number;
+}
+
+export type { IMenuItems, IPropsItemList, IBill };
