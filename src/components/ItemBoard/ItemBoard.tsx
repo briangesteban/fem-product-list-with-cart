@@ -55,16 +55,16 @@ const ItemBoard = () => {
           grandTotal={grandTotal}
           setGrandTotal={setGrandTotal}
         />
-        <CartPreview
-          totalItems={totalItems}
-          storage={storage}
-          grandTotal={grandTotal}
-          setGrandTotal={setGrandTotal}
-          setTotalItems={setTotalItems}
-          setBill={setBill}
-          setIsModalOn={setIsModalOn}
-        />
       </section>
+      <CartPreview
+        totalItems={totalItems}
+        storage={storage}
+        grandTotal={grandTotal}
+        setGrandTotal={setGrandTotal}
+        setTotalItems={setTotalItems}
+        setBill={setBill}
+        setIsModalOn={setIsModalOn}
+      />
       <BillModal
         bill={bill}
         isModalOn={isModalOn}

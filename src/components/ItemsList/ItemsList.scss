@@ -1,9 +1,14 @@
+@use "../../styles/media-queries" as *;
 @use "../../styles/colors" as *;
 @use "../../styles/typography" as *;
 
 .card {
   width: 100%;
   margin-bottom: 1.5rem;
+
+  @include desktop() {
+    width: 10rem;
+  }
 
   &__img-container {
     width: inherit;

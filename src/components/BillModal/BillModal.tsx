@@ -38,38 +38,42 @@ const BillModal = (props: {
   });
 
   return (
-    <div
-      className={
-        !isModalOn ? "modal-overlay" : "modal-overlay modal-overlay--true"
-      }
-    >
-      <article className="bill-modal">
-        <div className="bill-modal__content">
-          <img src={SuccessIcon} alt="" className="bill-modal__icon" />
-          <h2 className="bill-modal__header">Order Confirmed</h2>
-          <p className="bill-modal__subheader">We hope you enjoy your food!</p>
-          <div className="bill-modal__order-preview">
-            <ul className="order-preview">
-              {orderPreview}
-              <h5 className="order-preview__grand-total">
-                Order Total
-                <span className="order-preview__grand-price">
-                  {`$${bill.grandTotal.toFixed(2)}`}
-                </span>
-              </h5>
-            </ul>
+    isModalOn && (
+      <div
+        className={
+          !isModalOn ? "modal-overlay" : "modal-overlay modal-overlay--true"
+        }
+      >
+        <article className="bill-modal">
+          <div className="bill-modal__content">
+            <img src={SuccessIcon} alt="" className="bill-modal__icon" />
+            <h2 className="bill-modal__header">Order Confirmed</h2>
+            <p className="bill-modal__subheader">
+              We hope you enjoy your food!
+            </p>
+            <div className="bill-modal__order-preview">
+              <ul className="order-preview">
+                {orderPreview}
+                <h5 className="order-preview__grand-total">
+                  Order Total
+                  <span className="order-preview__grand-price">
+                    {`$${bill.grandTotal.toFixed(2)}`}
+                  </span>
+                </h5>
+              </ul>
+            </div>
           </div>
-        </div>
-        <button
-          className="bill-modal__btn-new"
-          onClick={() => {
-            setIsModalOn(false);
-          }}
-        >
-          Start New Order
-        </button>
-      </article>
-    </div>
+          <button
+            className="bill-modal__btn-new"
+            onClick={() => {
+              setIsModalOn(false);
+            }}
+          >
+            Start New Order
+          </button>
+        </article>
+      </div>
+    )
   );
 };
 

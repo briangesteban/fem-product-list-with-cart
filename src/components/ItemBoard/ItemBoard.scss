@@ -1,3 +1,4 @@
+@use "../../styles/media-queries" as *;
 @use "../../styles/typography" as *;
 
 .item-board {
@@ -8,9 +9,14 @@
     font-size: $fs-header;
     margin-bottom: 2rem;
   }
+
   &__menu-list {
     display: flex;
     flex-flow: column wrap;
+
+    @include desktop() {
+      flex-direction: row;
+    }
 
     &--true {
       display: none;
