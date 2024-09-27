@@ -18,6 +18,12 @@ button {
   font: inherit;
 }
 
+a,
+input,
+button {
+  cursor: pointer;
+}
+
 strong {
   font-weight: $fw-black;
 }
@@ -40,9 +46,5 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-
-    // & > * {
-    //   flex-grow: 1;
-    // }
   }
 }

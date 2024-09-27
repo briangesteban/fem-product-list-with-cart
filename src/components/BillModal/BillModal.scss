@@ -1,3 +1,4 @@
+@use "../../styles/media-queries" as *;
 @use "../../styles/colors" as *;
 @use "../../styles/typography" as *;
 
@@ -26,11 +27,23 @@
   border-radius: 0.8rem 0.8rem 0 0;
   padding: 1.5rem;
   width: inherit;
-  height: 36rem;
+  height: 88vh;
+
+  @include tablet() {
+    height: 93vh;
+  }
+
+  @include desktop() {
+    border-radius: 0.8rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30rem;
+    max-height: 45rem;
+  }
 
   &__content {
-    max-height: inherit;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 1.5rem 0 2rem 0;
   }
 
@@ -57,7 +70,7 @@
     border: none;
     border-radius: 25rem;
     padding: 1rem;
-    width: inherit;
+    width: 100%;
     margin-top: auto;
   }
 

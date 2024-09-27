@@ -4,12 +4,22 @@
 .item-board {
   padding: 1.5rem;
 
-  @include desktop() {
+  @include tablet() {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  @include desktop() {
     max-width: 1280px;
-    padding-inline: 0;
+    padding: 0;
     margin: 5rem auto;
+  }
+
+  &--true {
+    overflow: hidden;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 5rem 0;
   }
 
   &__menu {
@@ -29,15 +39,13 @@
     flex-flow: column wrap;
     flex-basis: 70%;
 
-    @include desktop() {
+    @include tablet() {
       flex-direction: row;
-      margin-right: 1.5rem;
       gap: 1.5rem;
     }
 
-    &--true {
-      display: none;
-      overflow: hidden;
+    @include desktop() {
+      margin-right: 1.5rem;
     }
   }
 }

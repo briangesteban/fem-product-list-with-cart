@@ -38,16 +38,10 @@ const ItemBoard = () => {
   }, [totalItems]);
 
   return (
-    <main className="item-board">
+    <main className={!isModalOn ? "item-board" : "item-board item-board--true"}>
       <section className="item-board__menu">
         <h1 className="item-board__header">Desserts</h1>
-        <section
-          className={
-            !isModalOn
-              ? "item-board__menu-list"
-              : "item-board__menu-list item-board__menu-list--true"
-          }
-        >
+        <section className="item-board__menu-list">
           <ItemsList
             menuItems={menuItems}
             storage={storage}
