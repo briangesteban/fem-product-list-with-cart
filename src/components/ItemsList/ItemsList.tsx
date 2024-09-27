@@ -26,10 +26,10 @@ const ItemsList = (props: IPropsItemList) => {
           <picture>
             <source
               media="(min-width: 1440px)"
-              srcSet={menuItem.image.desktop}
+              srcSet={`https://briangesteban.github.io/fem-product-list-with-cart/${menuItem.image.desktop}`}
             />
             <img
-              src={menuItem.image.mobile}
+              src={`https://briangesteban.github.io/fem-product-list-with-cart/${menuItem.image.mobile}`}
               alt={menuItem.name}
               className={
                 storage[menuItem.name]
