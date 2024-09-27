@@ -39,22 +39,24 @@ const ItemBoard = () => {
 
   return (
     <main className="item-board">
-      <h1 className="item-board__header">Desserts</h1>
-      <section
-        className={
-          !isModalOn
-            ? "item-board__menu-list"
-            : "item-board__menu-list item-board__menu-list--true"
-        }
-      >
-        <ItemsList
-          menuItems={menuItems}
-          storage={storage}
-          totalItems={totalItems}
-          setTotalItems={setTotalItems}
-          grandTotal={grandTotal}
-          setGrandTotal={setGrandTotal}
-        />
+      <section className="item-board__menu">
+        <h1 className="item-board__header">Desserts</h1>
+        <section
+          className={
+            !isModalOn
+              ? "item-board__menu-list"
+              : "item-board__menu-list item-board__menu-list--true"
+          }
+        >
+          <ItemsList
+            menuItems={menuItems}
+            storage={storage}
+            totalItems={totalItems}
+            setTotalItems={setTotalItems}
+            grandTotal={grandTotal}
+            setGrandTotal={setGrandTotal}
+          />
+        </section>
       </section>
       <CartPreview
         totalItems={totalItems}

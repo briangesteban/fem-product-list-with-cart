@@ -4,6 +4,20 @@
 .item-board {
   padding: 1.5rem;
 
+  @include desktop() {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1280px;
+    padding-inline: 0;
+    margin: 5rem auto;
+  }
+
+  &__menu {
+    @include desktop() {
+      flex-basis: 70%;
+    }
+  }
+
   &__header {
     font-weight: $fw-black;
     font-size: $fs-header;
@@ -13,9 +27,12 @@
   &__menu-list {
     display: flex;
     flex-flow: column wrap;
+    flex-basis: 70%;
 
     @include desktop() {
       flex-direction: row;
+      margin-right: 1.5rem;
+      gap: 1.5rem;
     }
 
     &--true {

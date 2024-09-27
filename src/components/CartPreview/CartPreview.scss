@@ -9,7 +9,8 @@
   width: 100%;
 
   @include desktop() {
-    width: 5rem;
+    width: 30%;
+    height: fit-content;
   }
 
   &__header {
