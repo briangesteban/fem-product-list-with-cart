@@ -23,15 +23,21 @@ const ItemsList = (props: IPropsItemList) => {
     return (
       <article className="card" key={index}>
         <div className="card__img-container">
-          <img
-            src={menuItem.image.mobile}
-            alt={menuItem.name}
-            className={
-              storage[menuItem.name]
-                ? "card__item-img card__item-img--border-on"
-                : "card__item-img"
-            }
-          />
+          <picture>
+            <source
+              media="(min-width: 1440px)"
+              srcSet={menuItem.image.desktop}
+            />
+            <img
+              src={menuItem.image.mobile}
+              alt={menuItem.name}
+              className={
+                storage[menuItem.name]
+                  ? "card__item-img card__item-img--border-on"
+                  : "card__item-img"
+              }
+            />
+          </picture>
           <button
             className={
               storage[menuItem.name]

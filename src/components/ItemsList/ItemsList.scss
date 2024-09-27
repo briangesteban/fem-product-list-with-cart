@@ -77,8 +77,14 @@
   }
 
   &__item-img {
-    width: inherit;
+    width: 100%;
     border-radius: 0.5rem;
+
+    @include desktop() {
+      object-fit: cover;
+      height: 15rem;
+      aspect-ratio: 1 / 1;
+    }
 
     &--border-on {
       border: solid 2px $clr-red;
