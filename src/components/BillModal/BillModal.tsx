@@ -16,7 +16,7 @@ const BillModal = (props: {
       <li className="order-preview__item" key={index}>
         <div className="order-preview__item-wrapper">
           <img
-            src={`${import.meta.env.BASE_URL}/${
+            src={`${import.meta.env.BASE_URL}${
               menuItems.find((item) => item.name === cartItem)?.image.thumbnail
             }`}
             alt={cartItem}
