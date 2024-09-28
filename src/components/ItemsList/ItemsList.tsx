@@ -26,10 +26,10 @@ const ItemsList = (props: IPropsItemList) => {
           <picture>
             <source
               media="(min-width: 1440px)"
-              srcSet={menuItem.image.desktop}
+              srcSet={`${import.meta.env.BASE_URL}/${menuItem.image.desktop}`}
             />
             <img
-              src={menuItem.image.mobile}
+              src={`${import.meta.env.BASE_URL}/${menuItem.image.mobile}`}
               alt={menuItem.name}
               className={
                 storage[menuItem.name]
