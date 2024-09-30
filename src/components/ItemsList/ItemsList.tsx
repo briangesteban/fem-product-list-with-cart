@@ -72,7 +72,6 @@ const ItemsList = (props: IPropsItemList) => {
           >
             <button
               className="card__btn-counter"
-              aria-label="Decrease value"
               onClick={() => {
                 decreaseCountHandler(
                   menuItem.name,
@@ -85,16 +84,15 @@ const ItemsList = (props: IPropsItemList) => {
                 );
               }}
             >
-              <img src={DecreaseIcon} alt="Decrease icon" />
+              <img src={DecreaseIcon} alt="Decrease Value" />
             </button>
-            <span className="card__item-count" aria-label="Item Count">
+            <span className="card__item-count" aria-label="Current Item Count">
               {!storage[menuItem.name]
                 ? 0
                 : JSON.parse(storage[menuItem.name]).count}
             </span>
             <button
               className="card__btn-counter"
-              aria-label="Increase value"
               onClick={() => {
                 increaseCountHandler(
                   menuItem.name,
@@ -107,7 +105,7 @@ const ItemsList = (props: IPropsItemList) => {
                 );
               }}
             >
-              <img src={IncreaseIcon} alt="Increase icon" />
+              <img src={IncreaseIcon} alt="Increase value" />
             </button>
           </div>
         </div>
