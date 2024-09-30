@@ -102,7 +102,7 @@ const CartPreview = (props: {
             : "cart-preview__cart-list"
         }
       >
-        <ul className="cart-list">{totalItems && cartList}</ul>
+        <ul className="cart-list">{!totalItems ? cartList : null}</ul>
         <h4 className="cart-preview__order-total">
           Order Total
           <span className="cart-preview__total-price">{`$${grandTotal.toFixed(

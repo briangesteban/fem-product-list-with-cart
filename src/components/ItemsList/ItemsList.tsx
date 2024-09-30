@@ -68,6 +68,7 @@ const ItemsList = (props: IPropsItemList) => {
                 ? "card__item-counter card__item-counter--visible"
                 : "card__item-counter"
             }
+            role="group"
             aria-label={`${menuItem.name} Count`}
           >
             <button

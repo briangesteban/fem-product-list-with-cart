@@ -41,7 +41,7 @@ const ItemBoard = () => {
     <main className={!isModalOn ? "item-board" : "item-board item-board--true"}>
       <section className="item-board__menu">
         <h1 className="item-board__header">Desserts</h1>
-        <section className="item-board__menu-list">
+        <div className="item-board__menu-list">
           <ItemsList
             menuItems={menuItems}
             storage={storage}
@@ -50,7 +50,7 @@ const ItemBoard = () => {
             grandTotal={grandTotal}
             setGrandTotal={setGrandTotal}
           />
-        </section>
+        </div>
       </section>
       <CartPreview
         totalItems={totalItems}
