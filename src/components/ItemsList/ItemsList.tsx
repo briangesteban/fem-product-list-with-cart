@@ -69,7 +69,7 @@ const ItemsList = (props: IPropsItemList) => {
                 : "card__item-counter"
             }
             role="group"
-            aria-label={`${menuItem.name} Count`}
+            aria-label={`${menuItem.name} Item Count`}
           >
             <button
               className="card__btn-counter"
@@ -87,7 +87,14 @@ const ItemsList = (props: IPropsItemList) => {
             >
               <img src={DecreaseIcon} alt="Decrease Value" />
             </button>
-            <span className="card__item-count" aria-label="Current Item Count">
+            <span
+              className="card__item-count"
+              aria-valuetext={`${
+                !storage[menuItem.name]
+                  ? 0
+                  : JSON.parse(storage[menuItem.name]).count
+              } ${menuItem.name} on cart`}
+            >
               {!storage[menuItem.name]
                 ? 0
                 : JSON.parse(storage[menuItem.name]).count}
