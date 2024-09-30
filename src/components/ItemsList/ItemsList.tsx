@@ -69,6 +69,8 @@ const ItemsList = (props: IPropsItemList) => {
                 : "card__item-counter"
             }
             role="meter"
+            aria-valuemin={0}
+            aria-valuemax={50}
             aria-label={`${menuItem.name} Item Count`}
           >
             <button
@@ -89,12 +91,10 @@ const ItemsList = (props: IPropsItemList) => {
             </button>
             <span
               className="card__item-count"
-              aria-valuemin="0"
-              aria-valuemax="50"
               aria-valuenow={
                 !storage[menuItem.name]
                   ? 0
-                  : JSON.parse(storage[menuItem.name]).count
+                  : Number(JSON.parse(storage[menuItem.name]).count)
               }
             >
               {!storage[menuItem.name]
