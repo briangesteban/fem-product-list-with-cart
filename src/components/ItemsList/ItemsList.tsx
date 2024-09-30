@@ -68,7 +68,9 @@ const ItemsList = (props: IPropsItemList) => {
                 ? "card__item-counter card__item-counter--visible"
                 : "card__item-counter"
             }
-            role="group"
+            role="meter"
+            aria-valuemin="0"
+            aria-valuemax="50"
             aria-label={`${menuItem.name} Item Count`}
           >
             <button
@@ -89,11 +91,11 @@ const ItemsList = (props: IPropsItemList) => {
             </button>
             <span
               className="card__item-count"
-              aria-valuetext={`${
+              aria-valuenow={
                 !storage[menuItem.name]
                   ? 0
                   : JSON.parse(storage[menuItem.name]).count
-              } ${menuItem.name} on cart`}
+              }
             >
               {!storage[menuItem.name]
                 ? 0

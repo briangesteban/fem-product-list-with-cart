@@ -43,11 +43,17 @@ const BillModal = (props: {
         className={
           !isModalOn ? "modal-overlay" : "modal-overlay modal-overlay--true"
         }
+        role="alertdialog"
+        aria-modal={isModalOn}
+        aria-labelledby="dialogDesc"
+        aria-description="You've successfully ordered your items"
       >
         <article className="bill-modal">
           <div className="bill-modal__content">
             <img src={SuccessIcon} alt="" className="bill-modal__icon" />
-            <h2 className="bill-modal__header">Order Confirmed</h2>
+            <h2 className="bill-modal__header" id="dialogDesc">
+              Order Confirmed
+            </h2>
             <p className="bill-modal__subheader">
               We hope you enjoy your food!
             </p>
