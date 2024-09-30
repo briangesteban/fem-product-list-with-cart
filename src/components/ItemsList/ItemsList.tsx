@@ -68,9 +68,7 @@ const ItemsList = (props: IPropsItemList) => {
                 ? "card__item-counter card__item-counter--visible"
                 : "card__item-counter"
             }
-            role="meter"
-            aria-valuemin={0}
-            aria-valuemax={50}
+            role="group"
             aria-label={`${menuItem.name} Item Count`}
           >
             <button
@@ -89,14 +87,7 @@ const ItemsList = (props: IPropsItemList) => {
             >
               <img src={DecreaseIcon} alt="Decrease Value" />
             </button>
-            <span
-              className="card__item-count"
-              aria-valuenow={
-                !storage[menuItem.name]
-                  ? 0
-                  : Number(JSON.parse(storage[menuItem.name]).count)
-              }
-            >
+            <span className="card__item-count">
               {!storage[menuItem.name]
                 ? 0
                 : JSON.parse(storage[menuItem.name]).count}
